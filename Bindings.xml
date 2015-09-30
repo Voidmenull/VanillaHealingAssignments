@@ -1,0 +1,25 @@
+<Bindings>
+	<Binding name="post opened Assignments" header="HEAD"> HealingAsssignments:PostAssignments()
+	</Binding>
+	<Binding name="show/hide the GUI Menu"> 
+			if HealingAsssignments.Mainframe:IsVisible() then HealingAsssignments.Mainframe:Hide()
+			else HealingAsssignments.Mainframe:Show() end	
+	</Binding>
+	<Binding name="enable/disable colored Postings"> 
+			if HealingAsssignments.Mainframe.ColoredPostingsCheckbox:GetChecked() == nil then HealingAsssignments.Mainframe.ColoredPostingsCheckbox:SetChecked(1); DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00VHA|r: colored postings enabled",1,1,1)
+			else HealingAsssignments.Mainframe.ColoredPostingsCheckbox:SetChecked(nil) DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00VHA|r: colored postings disabled",1,1,1) end
+	</Binding>
+	<Binding name="hide/show Minimap Icon"> 
+			if HealingAsssignments.Minimap:IsVisible() then HealingAsssignments.Minimap:Hide()
+			else HealingAsssignments.Minimap:Show() end
+	</Binding>
+	<Binding name="enable/disable sync"> 
+			HealingAsssignments.Syncframe:TriggerSync()
+	</Binding>
+	<Binding name="enable/disable Death warnings"> 
+			if HealingAsssignments.Mainframe.DeathWarningCheckbox:GetChecked() == nil then HealingAsssignments.Mainframe.DeathWarningCheckbox:SetChecked(1); DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00VHA|r: Death Warnings enabled",1,1,1)
+			else HealingAsssignments.Mainframe.DeathWarningCheckbox:SetChecked(nil) DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00VHA|r: Death Warnings disabled",1,1,1) end
+			if HealingAsssignments.Mainframe.DeathWarningCheckbox:GetChecked() == nil then HealingAssignmentsTemplates.Options.Deathwarnings = nil
+			elseif HealingAsssignments.Mainframe.DeathWarningCheckbox:GetChecked() == 1 then HealingAssignmentsTemplates.Options.Deathwarnings = 1 end
+	</Binding>
+</Bindings>
