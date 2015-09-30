@@ -80,11 +80,6 @@ function HealingAsssignments:SetNumberOfHealers()
 	HealingAsssignments.Mainframe.BottomLeftFontString:SetText("Number of Healers: "..NumHealers)
 end
 
--- debug func
-function print(content)
-	DEFAULT_CHAT_FRAME:AddMessage(content)
-end
-
 -- Initial Configure and Creation after Login
 function HealingAsssignments.Mainframe:ConfigureFrame()
 	-- set initial settings
@@ -659,10 +654,6 @@ function HealingAsssignments.Mainframe:ConfigureFrame()
 	
 	-- Create Minimap Icon
 	HealingAsssignments.Minimap:CreateMinimapIcon()
-	
-	-- Create Sync Frames
-	--HealingAsssignments.Syncframe:ConfigureFrame()
-	HealingAsssignments.Syncframe:Hide()
 	
 	-- dyncmic creation --
 	----------------------
@@ -1494,7 +1485,6 @@ function HealingAsssignments.Mainframe:LoadDropdown(ProfileNum,TemplateNumber)
 	for i=1,TankNum do
 		HealingAsssignments.Mainframe:AddTankDropdown(ProfileNum,TemplateNumber)
 		HealerNum = HealingAssignmentsTemplates.Profile[ProfileNum].Template[TemplateNumber].TankHealer[i]
-		--print(ProfileNum.." "..TemplateNumber.." "..i)
 		getglobal(HealingAsssignments.Mainframe.Foreground.Profile[ProfileNum].Template[TemplateNumber].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetText(HealingAssignmentsTemplates.Profile[ProfileNum].Template[TemplateNumber].Tank[i])
 		if HealerNum == nil then HealerNum = 0 end
 		for j=1,HealerNum do

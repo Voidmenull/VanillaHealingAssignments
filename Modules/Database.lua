@@ -146,8 +146,6 @@ function HealingAsssignments:CreateRaidDatabase()
 		HealingAsssignments.Raiddatabase[i].Class = UnitClass("raid"..i)
 		HealingAsssignments.Raiddatabase[i].Connection = UnitIsConnected("raid"..i)
 	end
-	--print(table.getn(HealingAsssignments.Raiddatabase))
-	-- bearbeite weiter
 end	
 
 -- Update the raiddatabase and set Colors
