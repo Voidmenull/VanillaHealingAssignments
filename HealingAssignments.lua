@@ -5,7 +5,7 @@ HealingAsssignments.Syncframe = CreateFrame("Frame",nil,HealingAsssignments.Main
 
 tinsert(UISpecialFrames, "VHAMainFrame")
 
-VHA_VERSION = "2.12"
+VHA_VERSION = "2.13"
 HealingAsssignments:RegisterEvent("ADDON_LOADED")
 HealingAsssignments:RegisterEvent("RAID_ROSTER_UPDATE")
 HealingAsssignments:RegisterEvent("CHAT_MSG_WHISPER")
@@ -54,10 +54,6 @@ function HealingAsssignments:OnEvent()
 		end
 		if arg1 == "!heal" or arg1 == "heal" then
 			HealingAsssignments:AnswerAssignments(arg2)
-		end
-		
-		if arg1 == "VHAversion" then
-			SendChatMessage(VHA_VERSION, "WHISPER", nil, arg2);
 		end
 
 	elseif event == "ADDON_LOADED" and arg1 == "VanillaHealingAssignments" then -- replace Name here
@@ -994,7 +990,7 @@ function HealingAsssignments.Minimap:CreateMinimapIcon()
 		GameTooltip:SetText("Vanilla Healing Assignments");
 		GameTooltip:AddLine("Left Click to show/hide menu.",1,1,1);
 		GameTooltip:AddLine("Right Click to post open assignment window.",1,1,1);
-		GameTooltip:AddLine("Mid Click to move Icon.",1,1,1);
+		GameTooltip:AddLine("Middle Button Click to move Icon.",1,1,1);
 		GameTooltip:Show()
 	end
 	
