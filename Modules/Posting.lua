@@ -1,7 +1,7 @@
 function HealingAsssignments:PostAssignments()
 	local SlowPostCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.SlowPostCheckbox:GetChecked()
 	local ActiveFrame = HealingAsssignments.Mainframe.ActiveFrame;
-	if ActiveFrame ~= nil and ActiveFrame ~= 15 and ActiveFrame ~= 16 then
+	if ActiveFrame ~= nil and ActiveFrame ~= 16 then
 		local chanText = HealingAsssignments.Mainframe.HealerChannelEditBox:GetText()
 		local  id, chatnamename = GetChannelName(chanText);
 		if chanText == nil or chanText == "" then DEFAULT_CHAT_FRAME:AddMessage("no Channel selected",1,1,1)
@@ -71,7 +71,7 @@ function HealingAsssignments:AnswerAssignments(PlayerName)
 	end
 
 	local ActiveFrame = HealingAsssignments.Mainframe.ActiveFrame;
-	if ActiveFrame ~= nil and ActiveFrame ~= 15 and ActiveFrame ~= 16 and found == 1 then
+	if ActiveFrame ~= nil and ActiveFrame ~= 16 and found == 1 then
 		local WhisperString = "You are not assigned."
 		local TankNameTemp
 		local HealerNameTemp
@@ -115,8 +115,8 @@ function HealingAsssignments:PostDeathWarning(PlayerName)
 	if ActiveFrame ~= nil and ActiveFrame ~= 16 then
 		local chanText = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.DeathWarningChannelTextbox:GetText()
 		local  id, chatnamename = GetChannelName(chanText);
-		if chanText == nil or chanText == "" then DEFAULT_CHAT_FRAME:AddMessage("no Channel selected",1,1,1)
-		elseif chatnamename == "world" or chatnamename == "World" or chanText == "1" or chanText == "2" or chanText == "3" then DEFAULT_CHAT_FRAME:AddMessage("You are trying to post in a public channel!",1,0,0);
+		if chanText == nil or chanText == "" then return
+		elseif chatnamename == "world" or chatnamename == "World" or chanText == "1" or chanText == "2" or chanText == "3" then return
 		else
 			local chan,chanNum = HealingAsssignments:GetSendChannel(chanText)
 			if not chan and not chanNum then return end
@@ -134,8 +134,8 @@ function HealingAsssignments:PostDeathWarning(PlayerName)
 				for j=1,HealerNum do
 					HealerNameTemp = getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[ActiveFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):GetText(" ")
 					if HealerNameTemp == PlayerName then 
-					HealerNameTemp = HealingAsssignments:GetColoredString(HealerNameTemp,1)
-					TankNameTemp = HealingAsssignments:GetColoredString(TankNameTemp,1)
+						HealerNameTemp = HealingAsssignments:GetColoredString(HealerNameTemp,1)
+						TankNameTemp = HealingAsssignments:GetColoredString(TankNameTemp,1)
 					if SlowPostCheck == 1 then HealingAsssignments:SendChatMessage(HealerNameTemp.." died - Tank was "..TankNameTemp..".",chan,nil,chanNum)
 					else SendChatMessage(HealerNameTemp.." died - Tank was "..TankNameTemp..".",chan,nil,chanNum) end
 					
