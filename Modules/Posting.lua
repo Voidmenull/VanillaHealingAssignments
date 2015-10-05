@@ -51,7 +51,7 @@ function HealingAsssignments:PostAssignments()
 						end
 					if SlowPostCheck == 1 then 
 					HealingAsssignments:SendChatMessage(HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.BottomText:GetText(),chan,nil,chanNum) -- 16 = optionsframe
-					HealingAsssignments:SendChatMessage("Whisper me: !heal (whisper) or !repost (repost)!",chan,nil,chanNum)
+					HealingAsssignments:SendChatMessage("Whisper me: heal (whisper) or repost (repost)!",chan,nil,chanNum)
 					else
 					SendChatMessage(HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.BottomText:GetText(),chan,nil,chanNum) -- 16 = optionsframe
 					SendChatMessage("Whisper me: !heal (whisper) or !repost (repost)!",chan,nil,chanNum) end
@@ -218,7 +218,7 @@ function HealingAsssignments:GetColoredString(NameString,Deathwarn)
 		if NameString == "Left Side" then Color = "c30000"
 		elseif NameString == "Right Side" then Color = "00ADEF" end
 
-		ColoredNameString = "\124cff"..Color..NameString.."\124r"
+		ColoredNameString = "\124cff"..Color.."\124Hitem:1\124h"..NameString.."\124h\124r"
 		return ColoredNameString
 	end
 end
