@@ -104,7 +104,7 @@ function HealingAsssignments.Mainframe:ConfigureFrame()
 	-- create Frames
 	if  HealingAssignmentsTemplates == nil then HealingAssignmentsTemplates = {} end
 	if HealingAssignmentsTemplates.Options == nil then HealingAssignmentsTemplates.Options = {} end
-	if HealingAssignmentsTemplates.Options.Delay == nil then HealingAssignmentsTemplates.Options.Delay = 300 end
+	if HealingAssignmentsTemplates.Options.Delay == nil then HealingAssignmentsTemplates.Options.Delay = 500 end
 	if HealingAssignmentsTemplates.Options.MinimapX == nil then HealingAssignmentsTemplates.Options.MinimapX = 0 end -- initial x position
 	if HealingAssignmentsTemplates.Options.MinimapY == nil then HealingAssignmentsTemplates.Options.MinimapY = 0 end  -- initial y position
 	if not HealingAssignmentsTemplates.Profile then HealingAssignmentsTemplates.Profile = {} end
