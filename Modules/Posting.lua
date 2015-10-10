@@ -65,8 +65,6 @@ end
 function HealingAsssignments:PostLastLine(chan,chanNum)
 	local repost = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperRepostCheckbox:GetChecked()
 	local heal = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperHealCheckbox:GetChecked()
-	--DEFAULT_CHAT_FRAME:AddMessage(repost)
-	--DEFAULT_CHAT_FRAME:AddMessage(heal)
 	if repost and heal then
 		SendChatMessage("Whisper me: heal (whisper) or repost (repost)!",chan,nil,chanNum)
 	elseif repost and not heal then
@@ -82,7 +80,6 @@ function HealingAsssignments:PostLastLineSlow(chan,chanNum)
 	local repost = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperRepostCheckbox:GetChecked()
 	local heal = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperHealCheckbox:GetChecked()
 	
-	
 	if repost and heal then
 		HealingAsssignments:SendChatMessage("Whisper me: heal (whisper) or repost (repost)!",chan,nil,chanNum)
 	elseif repost and not heal then
@@ -97,12 +94,13 @@ end
 function HealingAsssignments:AnswerAssignments(PlayerName)
 	local SlowPostCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.SlowPostCheckbox:GetChecked()
 	local found = 0
+	local heal = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperHealCheckbox:GetChecked()
 	for n=1,GetNumRaidMembers() do
 			if UnitName("raid"..n) == PlayerName then  found = 1 break; end
 	end
 
 	local ActiveFrame = HealingAsssignments.Mainframe.ActiveFrame;
-	if ActiveFrame ~= nil and ActiveFrame ~= 16 and found == 1 then
+	if ActiveFrame ~= nil and ActiveFrame ~= 16 and found == 1 and heal == 1 then
 		local WhisperString = "You are not assigned."
 		local TankNameTemp
 		local HealerNameTemp
@@ -133,8 +131,15 @@ end
 
 
 function HealingAsssignments:RepostAssignments(PlayerName)
+	local found = 0
+	local repost = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperRepostCheckbox:GetChecked()
+	
 	for i=1,GetNumRaidMembers() do
-		if UnitName("raid"..i) == PlayerName then HealingAsssignments:PostAssignments(); break; end
+		if UnitName("raid"..i) == PlayerName then  found = 1 break; end
+	end
+	
+	if found == 1 and repost == 1 then
+		HealingAsssignments:PostAssignments();
 	end
 end
 
