@@ -51,16 +51,47 @@ function HealingAsssignments:PostAssignments()
 						end
 					if SlowPostCheck == 1 then 
 					HealingAsssignments:SendChatMessage(HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.BottomText:GetText(),chan,nil,chanNum) -- 16 = optionsframe
-					HealingAsssignments:SendChatMessage("Whisper me: heal (whisper) or repost (repost)!",chan,nil,chanNum)
+					HealingAsssignments:PostLastLineSlow(chan,chanNum)
 					else
 					SendChatMessage(HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.BottomText:GetText(),chan,nil,chanNum) -- 16 = optionsframe
-					SendChatMessage("Whisper me: !heal (whisper) or !repost (repost)!",chan,nil,chanNum) end
+					HealingAsssignments:PostLastLine(chan,chanNum) end
 				end	
 		end
 	else
 		DEFAULT_CHAT_FRAME:AddMessage("No Template selected.",1,1,1)
 	end
+end
+
+function HealingAsssignments:PostLastLine(chan,chanNum)
+	local repost = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperRepostCheckbox:GetChecked()
+	local heal = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperHealCheckbox:GetChecked()
+	--DEFAULT_CHAT_FRAME:AddMessage(repost)
+	--DEFAULT_CHAT_FRAME:AddMessage(heal)
+	if repost and heal then
+		SendChatMessage("Whisper me: heal (whisper) or repost (repost)!",chan,nil,chanNum)
+	elseif repost and not heal then
+		SendChatMessage("Whisper me: repost (repost Assignments)!",chan,nil,chanNum)
+	elseif not repost and heal then
+		SendChatMessage("Whisper me: heal (re-whisper Assignments)!",chan,nil,chanNum)
+	else
 	
+	end
+end
+
+function HealingAsssignments:PostLastLineSlow(chan,chanNum)
+	local repost = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperRepostCheckbox:GetChecked()
+	local heal = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.WhisperHealCheckbox:GetChecked()
+	
+	
+	if repost and heal then
+		HealingAsssignments:SendChatMessage("Whisper me: heal (whisper) or repost (repost)!",chan,nil,chanNum)
+	elseif repost and not heal then
+		HealingAsssignments:SendChatMessage("Whisper me: repost (repost Assignments)!",chan,nil,chanNum)
+	elseif not repost and heal then
+		HealingAsssignments:SendChatMessage("Whisper me: heal (re-whisper Assignments)!",chan,nil,chanNum)
+	else
+	
+	end
 end
 
 function HealingAsssignments:AnswerAssignments(PlayerName)
@@ -216,7 +247,16 @@ function HealingAsssignments:GetColoredString(NameString,Deathwarn)
 		else Color = "00FF00" end
 		
 		if NameString == "Left Side" then Color = "c30000"
-		elseif NameString == "Right Side" then Color = "00ADEF" end
+		elseif NameString == "Right Side" then Color = "00ADEF"
+		elseif NameString == "{Skull}" then Color = "FFFFFF"
+		elseif NameString == "{Cross}" then Color = "FF0000"
+		elseif NameString == "{Circle}" then Color = "FFA500"
+		elseif NameString == "{Star}" then Color = "FFFF00"
+		elseif NameString == "{Square}" then Color = "4169E1"
+		elseif NameString == "{Triangle}" then Color = "00FF00"
+		elseif NameString == "{Diamond}" then Color = "FF00FF"
+		elseif NameString == "{Moon}" then Color = "E0FFFF"
+		end
 
 		ColoredNameString = "\124cff"..Color.."\124Hitem:1\124h"..NameString.."\124h\124r"
 		return ColoredNameString

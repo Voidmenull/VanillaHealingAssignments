@@ -5,7 +5,7 @@ HealingAsssignments.Syncframe = CreateFrame("Frame",nil,HealingAsssignments.Main
 
 tinsert(UISpecialFrames, "VHAMainFrame")
 
-VHA_VERSION = "2.14"
+VHA_VERSION = "2.15"
 HealingAsssignments:RegisterEvent("ADDON_LOADED")
 HealingAsssignments:RegisterEvent("RAID_ROSTER_UPDATE")
 HealingAsssignments:RegisterEvent("CHAT_MSG_WHISPER")
@@ -103,7 +103,10 @@ function HealingAsssignments.Mainframe:ConfigureFrame()
 	
 	-- create Frames
 	if  HealingAssignmentsTemplates == nil then HealingAssignmentsTemplates = {} end
-	if HealingAssignmentsTemplates.Options == nil then HealingAssignmentsTemplates.Options = {} end
+	if HealingAssignmentsTemplates.Options == nil then HealingAssignmentsTemplates.Options = {} 
+												HealingAssignmentsTemplates.Options.WhisperRepost = 1
+												HealingAssignmentsTemplates.Options.WhisperHeal = 1
+												end
 	if HealingAssignmentsTemplates.Options.Delay == nil then HealingAssignmentsTemplates.Options.Delay = 500 end
 	if HealingAssignmentsTemplates.Options.MinimapX == nil then HealingAssignmentsTemplates.Options.MinimapX = 0 end -- initial x position
 	if HealingAssignmentsTemplates.Options.MinimapY == nil then HealingAssignmentsTemplates.Options.MinimapY = 0 end  -- initial y position
@@ -116,6 +119,7 @@ function HealingAsssignments.Mainframe:ConfigureFrame()
 		if not HealingAssignmentsTemplates.Profile[i].Name then HealingAssignmentsTemplates.Profile[i].Name = " " end
 	end
 	HealingAssignmentsTemplates.Profile[1].Name = UnitName("player")
+
 	
 	
 	local OptionsFrameNum = 16; -- options frame
@@ -669,6 +673,10 @@ end
 
 function HealingAsssignments.Mainframe:CreateOptions(TemplateNumber)
 
+	-- reset scroll frame
+	--self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:SetHeight(100) 
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Scrollbar:SetMinMaxValues(0, 90)
+
 	-- create bottom text
 	local String1 = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
     String1:SetPoint("TOPLEFT", -70, -20)
@@ -932,10 +940,92 @@ function HealingAsssignments.Mainframe:CreateOptions(TemplateNumber)
 	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.SlowPostTextbox:SetScript("OnTextChanged", function() 
 		HealingAssignmentsTemplates.Options.Delay = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.SlowPostTextbox:GetNumber()
 		end)
-
+		
+	-- whisper configs
+	local WhisperConfigText = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
+    DeathWarningChannelText:SetPoint("TOPLEFT", -70, -290)
+    DeathWarningChannelText:SetFont("Fonts\\FRIZQT__.TTF", 11)
+	DeathWarningChannelText:SetWidth(200)
+	DeathWarningChannelText:SetJustifyH("RIGHT")
+    DeathWarningChannelText:SetText("Whisper Mode:")
+	
+	local WhisperRepostText = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
+    WhisperRepostText:SetPoint("TOPLEFT", -30, -310)
+    WhisperRepostText:SetFont("Fonts\\FRIZQT__.TTF", 11)
+	WhisperRepostText:SetWidth(200)
+	WhisperRepostText:SetJustifyH("RIGHT")
+    WhisperRepostText:SetText("Repost:")
+	
+	local WhisperHealText = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
+    WhisperHealText:SetPoint("TOPLEFT", 130, -310)
+    WhisperHealText:SetFont("Fonts\\FRIZQT__.TTF", 11)
+	WhisperHealText:SetWidth(200)
+	WhisperHealText:SetJustifyH("RIGHT")
+    WhisperHealText:SetText("Whisper:")
+	
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox = CreateFrame("CheckButton", nil, self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content, "UICheckButtonTemplate")
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:SetPoint("TOPLEFT",180,-300)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:SetFrameStrata("LOW")
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(HealingAsssignments.Mainframe, "ANCHOR_TOPLEFT");
+		GameTooltip:SetText("Enable/Disable Auto-Repost Assignments by whispers.", 1,1,1);
+		GameTooltip:Show()
+	end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:SetScript("OnClick", function () PlaySound("igMainMenuOptionCheckBoxOn") 
+												if HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:GetChecked() == nil then HealingAssignmentsTemplates.Options.WhisperRepost = nil
+												elseif HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:GetChecked() == 1 then HealingAssignmentsTemplates.Options.WhisperRepost = 1 end
+																														end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperRepostCheckbox:SetChecked(HealingAssignmentsTemplates.Options.WhisperRepost)
+	
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox = CreateFrame("CheckButton", nil, self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content, "UICheckButtonTemplate")
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:SetPoint("TOPLEFT",340,-300)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:SetFrameStrata("LOW")
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(HealingAsssignments.Mainframe, "ANCHOR_TOPLEFT");
+		GameTooltip:SetText("Enable/Disable Auto-Whisper Assignments by whispers.", 1,1,1);
+		GameTooltip:Show()
+	end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:SetScript("OnClick", function () PlaySound("igMainMenuOptionCheckBoxOn") 
+												if HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:GetChecked() == nil then HealingAssignmentsTemplates.Options.WhisperHeal = nil
+												elseif HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:GetChecked() == 1 then HealingAssignmentsTemplates.Options.WhisperHeal = 1 end
+																														end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.WhisperHealCheckbox:SetChecked(HealingAssignmentsTemplates.Options.WhisperHeal)
+	
+	-- additional healers
+	local AdditionHealersText = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
+    AdditionHealersText:SetPoint("TOPLEFT", -70, -340)
+    AdditionHealersText:SetFont("Fonts\\FRIZQT__.TTF", 11)
+	AdditionHealersText:SetWidth(200)
+	AdditionHealersText:SetJustifyH("RIGHT")
+    AdditionHealersText:SetText("additional Healers:")
+	
+	local AdditionHealersMarksText = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
+    AdditionHealersMarksText:SetPoint("TOPLEFT", 70, -340)
+    AdditionHealersMarksText:SetFont("Fonts\\FRIZQT__.TTF", 11)
+	AdditionHealersMarksText:SetWidth(200)
+	AdditionHealersMarksText:SetJustifyH("RIGHT")
+    AdditionHealersMarksText:SetText("Raid Markers")
+	
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox = CreateFrame("CheckButton", nil, self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content, "UICheckButtonTemplate")
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:SetPoint("TOPLEFT",150,-330)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:SetFrameStrata("LOW")
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:SetScript("OnEnter", function() 
+		GameTooltip:SetOwner(HealingAsssignments.Mainframe, "ANCHOR_TOPLEFT");
+		GameTooltip:SetText("Add Raid Markers to Healer Dropdowns.", 1,1,1);
+		GameTooltip:Show()
+	end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:SetScript("OnClick", function () PlaySound("igMainMenuOptionCheckBoxOn") 
+												if HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:GetChecked() == nil then HealingAssignmentsTemplates.Options.AdditionHealers = nil
+												elseif HealingAsssignments.Mainframe.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:GetChecked() == 1 then HealingAssignmentsTemplates.Options.AdditionHealers = 1 end
+																														end)
+	self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content.AdditionalHealersCheckbox:SetChecked(HealingAssignmentsTemplates.Options.AdditionHealers)
+	
 	-- bottom
 	local BottomText = self.Foreground.Profile[1].Template[TemplateNumber].Assigments.Content:CreateFontString(nil, "OVERLAY")
-    BottomText:SetPoint("TOPLEFT", 150, -288)
+    BottomText:SetPoint("TOPLEFT", 150, -370)
     BottomText:SetFont("Fonts\\FRIZQT__.TTF", 11)
 	BottomText:SetJustifyH("CENTER")
     BottomText:SetText("Version "..VHA_VERSION.." - by Renew @ vanillagaming.org")

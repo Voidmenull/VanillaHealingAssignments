@@ -91,6 +91,7 @@ end
 
 -- populate a specific healer dropdown
 function HealingAsssignments.Mainframe:PopulateHealerDropdown()
+	local RaidMarkCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.AdditionalHealersCheckbox:GetChecked()
 	local info = {};
 	for i=1,table.getn(HealingAsssignments.Raiddatabase) do
 		
@@ -114,6 +115,90 @@ function HealingAsssignments.Mainframe:PopulateHealerDropdown()
 			UIDropDownMenu_AddButton(info);
 		end
 	end
+	
+	-- Raid Marks
+	if RaidMarkCheck == 1 then 
+		-- {Skull}
+		info.text = "{Skull}"
+		info.textR = 1; info.textG = 1; info.textB = 1;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		-- {Cross}
+		info.text = "{Cross}"
+		info.textR = 1; info.textG = 0; info.textB = 0;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		-- {Circle}
+		info.text = "{Circle}"
+		info.textR = 1; info.textG = 0.647; info.textB = 0;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		-- {Star}
+		info.text = "{Star}"
+		info.textR = 1; info.textG = 1; info.textB = 0;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		-- 	{Square}
+		info.text = "{Square}"
+		info.textR = 0.255; info.textG = 0.412; info.textB = 0.882;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		-- {Triangle}
+		info.text = "{Triangle}"
+		info.textR = 0; info.textG = 1; info.textB = 0;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		--{Diamond}
+		info.text = "{Diamond}"
+		info.textR = 1; info.textG = 0; info.textB = 1;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+		
+		-- {Moon}
+		info.text = "{Moon}"
+		info.textR = 0.878; info.textG = 1; info.textB = 1;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalHealerDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+	
 	-- create emtpy field to deleting
 	info.text = " "
 	info.checked = false
@@ -204,9 +289,18 @@ function HealingAsssignments:UpdateRaidDataBase()
 					if UnitName("raid"..w) == HealerName then 
 						local color = self:GetClassColors(w)
 						getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(color[2],color[3],color[4],1)
-					end;
+					end
 				end
 				
+				if HealerName == "{Skull}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(1,1,1,1)
+				elseif HealerName == "{Cross}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(1,0,0,1)
+				elseif HealerName == "{Circle}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(1,0.647,0,1)
+				elseif HealerName == "{Star}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(1,1,0,1)
+				elseif HealerName == "{Square}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(0.255,0.412,0.882,1)
+				elseif HealerName == "{Triangle}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(0,1,0,1)
+				elseif HealerName == "{Diamond}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(1,0,1,1)
+				elseif HealerName == "{Moon}" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Healer[j]:GetName().."Text"):SetTextColor(1,1,1,1)
+				end
 			end
 		end
 	end
