@@ -353,24 +353,3 @@ function HealingAsssignments.Syncframe:UpdateDeleteButton()
 	if ProfileName == UnitName("player") then HealingAsssignments.Mainframe.SyncDeleteButton:Disable()
 	else HealingAsssignments.Mainframe.SyncDeleteButton:Enable() end
 end
-
-
--- from healCommm-1.0 addon / lua 5.1 workaround
-function strsplit(pString, pPattern)
-	local Table = {}
-	local fpat = "(.-)" .. pPattern
-	local last_end = 1
-	local s, e, cap = strfind(pString, fpat, 1)
-	while s do
-		if s ~= 1 or cap ~= "" then
-			table.insert(Table,cap)
-		end
-		last_end = e+1
-		s, e, cap = strfind(pString, fpat, last_end)
-	end
-	if last_end <= strlen(pString) then
-		cap = strfind(pString, last_end)
-		table.insert(Table, cap)
-	end
-	return Table
-end

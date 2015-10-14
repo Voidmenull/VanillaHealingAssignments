@@ -5,7 +5,7 @@ HealingAsssignments.Syncframe = CreateFrame("Frame",nil,HealingAsssignments.Main
 
 tinsert(UISpecialFrames, "VHAMainFrame")
 
-VHA_VERSION = "2.15"
+VHA_VERSION = "2.1.6"
 HealingAsssignments:RegisterEvent("ADDON_LOADED")
 HealingAsssignments:RegisterEvent("RAID_ROSTER_UPDATE")
 HealingAsssignments:RegisterEvent("CHAT_MSG_WHISPER")
@@ -36,7 +36,7 @@ function HealingAsssignments:OnEvent()
 		if HealingAsssignments.Mainframe.SyncCheckbox:GetChecked() == 1 and string.sub(arg1, 1, 3) == "VHA" and arg4 ~= UnitName("player") then
 			local TemplateNum = tonumber(string.sub(arg1, 5,6))
 			local TemplateName = string.sub(arg1, 8)
-			local NameArray = strsplit(arg2,"#")
+			local NameArray = VHAstrsplit(arg2,"#")
 			HealingAsssignments.Syncframe:Receive(arg4,TemplateNum,TemplateName,NameArray)
 		elseif HealingAsssignments.Mainframe.SyncCheckbox:GetChecked() == 1 and arg1 == "VHTrigger" and arg2 == "trigger" then HealingAsssignments.Syncframe:Send()
 		end
@@ -66,7 +66,28 @@ function HealingAsssignments:OnEvent()
 end
 
 HealingAsssignments:SetScript("OnEvent", HealingAsssignments.OnEvent)
-HealingAsssignments:SetScript("OnUpdate", HealingAsssignments.OnUpdate);
+HealingAsssignments:SetScript("OnUpdate", HealingAsssignments.OnUpdate)
+
+
+-- from healCommm-1.0 addon / lua 5.1 workaround
+function VHAstrsplit(pString, pPattern)
+	local Table = {}
+	local fpat = "(.-)" .. pPattern
+	local last_end = 1
+	local s, e, cap = strfind(pString, fpat, 1)
+	while s do
+		if s ~= 1 or cap ~= "" then
+			table.insert(Table,cap)
+		end
+		last_end = e+1
+		s, e, cap = strfind(pString, fpat, last_end)
+	end
+	if last_end <= strlen(pString) then
+		cap = strfind(pString, last_end)
+		table.insert(Table, cap)
+	end
+	return Table
+end
 
 function HealingAsssignments:SetNumberOfHealers()
 	local NumHealers = 0;
