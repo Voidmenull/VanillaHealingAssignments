@@ -5,7 +5,7 @@ HealingAsssignments.Syncframe = CreateFrame("Frame",nil,HealingAsssignments.Main
 
 tinsert(UISpecialFrames, "VHAMainFrame")
 
-VHA_VERSION = "2.1.6"
+VHA_VERSION = "2.1.7"
 HealingAsssignments:RegisterEvent("ADDON_LOADED")
 HealingAsssignments:RegisterEvent("RAID_ROSTER_UPDATE")
 HealingAsssignments:RegisterEvent("CHAT_MSG_WHISPER")
@@ -91,8 +91,10 @@ end
 
 function HealingAsssignments:SetNumberOfHealers()
 	local NumHealers = 0;
+	local Class = ""
 	for i=1,GetNumRaidMembers() do
-		if UnitClass("raid"..i)=="Priest" or UnitClass("raid"..i)=="Druid" or UnitClass("raid"..i)=="Shaman" or UnitClass("raid"..i)=="Paladin" then NumHealers = NumHealers +1 end
+		_,Class = UnitClass("raid"..i)
+		if Class == "PRIEST" or Class == "DRUID" or Class == "SHAMAN" or Class == "PALADIN" then NumHealers = NumHealers +1 end
 	end
 	HealingAsssignments.Mainframe.BottomLeftFontString:SetText("Number of Healers: "..NumHealers)
 end
@@ -245,63 +247,64 @@ function HealingAsssignments.Mainframe:ConfigureFrame()
 	local roll = math.random(1,3)
 	local backdropTemplate1 = {}
 	local backdropTemplate2 = {}
-	if UnitClass("player") == "Druid" then
+	local _,Class = UnitClass("player")
+	if Class == "DRUID" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\DruidBalance-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\DruidBalance-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\DruidFeralCombat-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\DruidFeralCombat-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\DruidRestoration-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\DruidRestoration-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Hunter" then
+	elseif Class == "HUNTER" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\HunterBeastMastery-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\HunterBeastMastery-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\HunterMarksmanship-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\HunterMarksmanship-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\HunterSurvival-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\HunterSurvival-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Mage" then
+	elseif Class == "MAGE" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\MageArcane-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\MageArcane-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\MageFire-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\MageFire-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\MageFrost-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\MageFrost-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Paladin" then
+	elseif Class == "PALADIN" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\PaladinCombat-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\PaladinCombat-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\PaladinHoly-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\PaladinHoly-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\PaladinProtection-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\PaladinProtection-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Priest" then
+	elseif Class == "PRIEST" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\PriestDiscipline-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\PriestDiscipline-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\PriestHoly-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\PriestHoly-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\PriestShadow-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\PriestShadow-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Rogue" then
+	elseif Class == "ROGUE" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\RogueAssassination-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\RogueAssassination-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\RogueCombat-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\RogueCombat-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\RogueSubtlety-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\RogueSubtlety-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Shaman" then
+	elseif Class == "SHAMAN" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\ShamanElementalCombat-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\ShamanElementalCombat-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\ShamanEnhancement-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\ShamanEnhancement-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\ShamanRestoration-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\ShamanRestoration-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Warlock" then
+	elseif Class == "WARLOCK" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\WarlockCurses-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\WarlockCurses-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\WarlockDestruction-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[2] = {bgFile = "Interface\\TalentFrame\\WarlockDestruction-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[3] = {bgFile = "Interface\\TalentFrame\\WarlockSummoning-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[3] = {bgFile = "Interface\\TalentFrame\\WarlockSummoning-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
-	elseif UnitClass("player") == "Warrior" then
+	elseif Class == "WARRIOR" then
 		backdropTemplate1[1] = {bgFile = "Interface\\TalentFrame\\WarriorArms-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}
 		backdropTemplate2[1] = {bgFile = "Interface\\TalentFrame\\WarriorArms-Bottomleft",insets = {left = 48,right = 48, top = 0, bottom = 10}}
 		backdropTemplate1[2] = {bgFile = "Interface\\TalentFrame\\WarriorFury-Topleft",insets = {left = 48,right = 48, top = 20, bottom = 0}}

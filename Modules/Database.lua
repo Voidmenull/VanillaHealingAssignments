@@ -13,26 +13,26 @@ function HealingAsssignments.Mainframe:PopulateTankDropdown()
 	local info = {};
 	for i=1,table.getn(HealingAsssignments.Raiddatabase) do
 		
-		if HealingAsssignments.Raiddatabase[i].Class == "Warrior" or 
-		(HealingAsssignments.Raiddatabase[i].Class == "Warlock" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.WarlockCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Druid" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.DruidCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Rogue" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.RogueCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Hunter" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.HunterCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Mage" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.MageCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Shaman" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.ShamanCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Priest" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.PriestCheckbox:GetChecked()) or
-		(HealingAsssignments.Raiddatabase[i].Class == "Paladin" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.PaladinCheckbox:GetChecked())
+		if HealingAsssignments.Raiddatabase[i].Class == "WARRIOR" or 
+		(HealingAsssignments.Raiddatabase[i].Class == "WARLOCK" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.WarlockCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "DRUID" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.DruidCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "ROGUE" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.RogueCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "HUNTER" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.HunterCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "MAGE" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.MageCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "SHAMAN" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.ShamanCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "PRIEST" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.PriestCheckbox:GetChecked()) or
+		(HealingAsssignments.Raiddatabase[i].Class == "PALADIN" and HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.PaladinCheckbox:GetChecked())
 		then
 			info.text = HealingAsssignments.Raiddatabase[i].Name
-			if HealingAsssignments.Raiddatabase[i].Class == "Warrior" then info.textR = 0.78; info.textG = 0.61; info.textB = 0.43;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Druid" then info.textR = 1.00; info.textG = 0.49; info.textB = 0.04;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Hunter" then info.textR = 0.67; info.textG = 0.83; info.textB = 0.45;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Mage" then info.textR = 0.41; info.textG = 0.80; info.textB = 0.94;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Rogue" then info.textR = 1.00; info.textG = 0.96; info.textB = 0.41;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Warlock" then info.textR = 0.58; info.textG = 0.51; info.textB = 0.79;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Shaman" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Priest" then info.textR = 1.00; info.textG = 1.00; info.textB = 1.00;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Paladin" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
+			if HealingAsssignments.Raiddatabase[i].Class == "WARRIOR" then info.textR = 0.78; info.textG = 0.61; info.textB = 0.43;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "DRUID" then info.textR = 1.00; info.textG = 0.49; info.textB = 0.04;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "HUNTER" then info.textR = 0.67; info.textG = 0.83; info.textB = 0.45;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "MAGE" then info.textR = 0.41; info.textG = 0.80; info.textB = 0.94;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "ROGUE" then info.textR = 1.00; info.textG = 0.96; info.textB = 0.41;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "WARLOCK" then info.textR = 0.58; info.textG = 0.51; info.textB = 0.79;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "SHAMAN" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "PRIEST" then info.textR = 1.00; info.textG = 1.00; info.textB = 1.00;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "PALADIN" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
 			end	
 			info.checked = false
 			--info.notCheckable = true
@@ -94,18 +94,17 @@ function HealingAsssignments.Mainframe:PopulateHealerDropdown()
 	local RaidMarkCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[16].Assigments.Content.AdditionalHealersCheckbox:GetChecked()
 	local info = {};
 	for i=1,table.getn(HealingAsssignments.Raiddatabase) do
-		
-		if HealingAsssignments.Raiddatabase[i].Class == "Druid" or HealingAsssignments.Raiddatabase[i].Class == "Shaman" or HealingAsssignments.Raiddatabase[i].Class == "Priest" or HealingAsssignments.Raiddatabase[i].Class == "Paladin" then
+		if HealingAsssignments.Raiddatabase[i].Class == "DRUID" or HealingAsssignments.Raiddatabase[i].Class == "SHAMAN" or HealingAsssignments.Raiddatabase[i].Class == "PRIEST" or HealingAsssignments.Raiddatabase[i].Class == "PALADIN" then
 			info.text = HealingAsssignments.Raiddatabase[i].Name
-			if HealingAsssignments.Raiddatabase[i].Class == "Warrior" then info.textR = 0.78; info.textG = 0.61; info.textB = 0.43;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Druid" then info.textR = 1.00; info.textG = 0.49; info.textB = 0.04;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Hunter" then info.textR = 0.67; info.textG = 0.83; info.textB = 0.45;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Mage" then info.textR = 0.41; info.textG = 0.80; info.textB = 0.94;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Rogue" then info.textR = 1.00; info.textG = 0.96; info.textB = 0.41;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Warlock" then info.textR = 0.58; info.textG = 0.51; info.textB = 0.79;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Shaman" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Priest" then info.textR = 1.00; info.textG = 1.00; info.textB = 1.00;
-			elseif HealingAsssignments.Raiddatabase[i].Class == "Paladin" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
+			if HealingAsssignments.Raiddatabase[i].Class == "WARRIOR" then info.textR = 0.78; info.textG = 0.61; info.textB = 0.43;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "DRUID" then info.textR = 1.00; info.textG = 0.49; info.textB = 0.04;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "HUNTER" then info.textR = 0.67; info.textG = 0.83; info.textB = 0.45;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "MAGE" then info.textR = 0.41; info.textG = 0.80; info.textB = 0.94;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "ROGUE" then info.textR = 1.00; info.textG = 0.96; info.textB = 0.41;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "WARLOCK" then info.textR = 0.58; info.textG = 0.51; info.textB = 0.79;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "SHAMAN" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "PRIEST" then info.textR = 1.00; info.textG = 1.00; info.textB = 1.00;
+			elseif HealingAsssignments.Raiddatabase[i].Class == "PALADIN" then info.textR = 0.96; info.textG = 0.55; info.textB = 0.73;
 			end	
 			info.checked = false
 			info.func = function()
@@ -228,7 +227,7 @@ function HealingAsssignments:CreateRaidDatabase()
 	for i=1,GetNumRaidMembers() do
 		HealingAsssignments.Raiddatabase[i] = {}
 		HealingAsssignments.Raiddatabase[i].Name = UnitName("raid"..i)
-		HealingAsssignments.Raiddatabase[i].Class = UnitClass("raid"..i)
+		_,HealingAsssignments.Raiddatabase[i].Class = UnitClass("raid"..i)
 		HealingAsssignments.Raiddatabase[i].Connection = UnitIsConnected("raid"..i)
 	end
 end	
@@ -310,17 +309,17 @@ end
 function HealingAsssignments:GetClassColors(RaidID)
 	
 	local classColors = {}
-	classColors[1] = UnitClass("raid"..RaidID)
+	_,classColors[1] = UnitClass("raid"..RaidID)
 	if UnitIsConnected("raid"..RaidID) == nil then classColors[2] = 0.7; classColors[3] = 0.7; classColors[4] = 0.7; classColors[5] = "BABABA"; return classColors
-    elseif classColors[1] == "Warrior" then classColors[2] = 0.78; classColors[3] = 0.61; classColors[4] = 0.43; classColors[5] = "C79C6E"; return classColors
-	elseif classColors[1] == "Hunter" then classColors[2] = 0.67; classColors[3] = 0.83; classColors[4] = 0.45; classColors[5] = "ABD473"; return classColors
-	elseif classColors[1] == "Mage" then classColors[2] = 0.41; classColors[3] = 0.80; classColors[4] = 0.94; classColors[5] = "69CCF0"; return classColors
-	elseif classColors[1] == "Rogue" then classColors[2] = 1.00; classColors[3] = 0.96; classColors[4] = 0.41; classColors[5] = "FFF569"; return classColors
-	elseif classColors[1] == "Warlock" then classColors[2] = 0.58; classColors[3] = 0.51; classColors[4] = 0.79; classColors[5] = "9482C9"; return classColors
-    elseif classColors[1] == "Druid" then classColors[2] = 1.00; classColors[3] = 0.49; classColors[4] = 0.04; classColors[5] = "FF7D0A"; return classColors
-    elseif classColors[1] == "Shaman" then classColors[2] = 0.96; classColors[3] = 0.55; classColors[4] = 0.73; classColors[5] = "F58CBA"; return classColors
-    elseif classColors[1] == "Priest" then classColors[2] = 1.00; classColors[3] = 1.00; classColors[4] = 1.00; classColors[5] = "FFFFFF"; return classColors
-    elseif classColors[1] == "Paladin" then classColors[2] = 0.96; classColors[3] = 0.55; classColors[4] = 0.73; classColors[5] = "FF0000" return classColors
+    elseif classColors[1] == "WARRIOR" then classColors[2] = 0.78; classColors[3] = 0.61; classColors[4] = 0.43; classColors[5] = "C79C6E"; return classColors
+	elseif classColors[1] == "HUNTER" then classColors[2] = 0.67; classColors[3] = 0.83; classColors[4] = 0.45; classColors[5] = "ABD473"; return classColors
+	elseif classColors[1] == "MAGE" then classColors[2] = 0.41; classColors[3] = 0.80; classColors[4] = 0.94; classColors[5] = "69CCF0"; return classColors
+	elseif classColors[1] == "ROGUE" then classColors[2] = 1.00; classColors[3] = 0.96; classColors[4] = 0.41; classColors[5] = "FFF569"; return classColors
+	elseif classColors[1] == "WARLOCK" then classColors[2] = 0.58; classColors[3] = 0.51; classColors[4] = 0.79; classColors[5] = "9482C9"; return classColors
+    elseif classColors[1] == "DRUID" then classColors[2] = 1.00; classColors[3] = 0.49; classColors[4] = 0.04; classColors[5] = "FF7D0A"; return classColors
+    elseif classColors[1] == "SHAMAN" then classColors[2] = 0.96; classColors[3] = 0.55; classColors[4] = 0.73; classColors[5] = "F58CBA"; return classColors
+    elseif classColors[1] == "PRIEST" then classColors[2] = 1.00; classColors[3] = 1.00; classColors[4] = 1.00; classColors[5] = "FFFFFF"; return classColors
+    elseif classColors[1] == "PALADIN" then classColors[2] = 0.96; classColors[3] = 0.55; classColors[4] = 0.73; classColors[5] = "FF0000" return classColors
     else classColors[1] = " "; classColors[2] = 1.00; classColors[3] = 0.00; classColors[4] = 0.00; classColors[5] = "FF0000"; return classColors
     end
     

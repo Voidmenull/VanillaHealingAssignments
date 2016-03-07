@@ -236,19 +236,19 @@ function HealingAsssignments:GetColoredString(NameString,Deathwarn)
 		
 		for i=1,GetNumRaidMembers() do
 			spot = i
-			if UnitName("raid"..i) == NameString then Class = UnitClass("raid"..i) break; end
+			if UnitName("raid"..i) == NameString then _,Class = UnitClass("raid"..i) break; end
 		end
 		
 		if UnitIsConnected("raid"..spot) == nil then Color = "a8a8a8"
-		elseif Class == "Warrior" then Color = "C79C6E"
-		elseif Class == "Hunter" then Color = "ABD473"
-		elseif Class == "Mage" then Color = "69CCF0"
-		elseif Class == "Rogue" then Color = "FFF569"
-		elseif Class == "Warlock" then Color = "9482C9"
-		elseif Class == "Druid" then Color = "FF7D0A"
-		elseif Class == "Shaman" then Color = "F58CBA"
-		elseif Class == "Priest" then Color = "FFFFFF"
-		elseif Class == "Paladin" then Color = "F58CBA"
+		elseif Class == "WARRIOR" then Color = "C79C6E"
+		elseif Class == "HUNTER" then Color = "ABD473"
+		elseif Class == "MAGE" then Color = "69CCF0"
+		elseif Class == "ROGUE" then Color = "FFF569"
+		elseif Class == "WARLOCK" then Color = "9482C9"
+		elseif Class == "DRUID" then Color = "FF7D0A"
+		elseif Class == "SHAMAN" then Color = "F58CBA"
+		elseif Class == "PRIEST" then Color = "FFFFFF"
+		elseif Class == "PALADIN" then Color = "F58CBA"
 		else Color = "00FF00" end
 		
 		if NameString == "Left Side" then Color = "c30000"
