@@ -253,6 +253,8 @@ function HealingAsssignments:GetColoredString(NameString,Deathwarn)
 		
 		if NameString == "Left Side" then Color = "c30000"
 		elseif NameString == "Right Side" then Color = "00ADEF"
+		elseif NameString == "Melee" then Color = "6a5d22"
+		elseif NameString == "Dispel" then Color = "FFFFFF"
 		elseif NameString == "{Skull}" then Color = "FFFFFF"
 		elseif NameString == "{Cross}" then Color = "FF0000"
 		elseif NameString == "{Circle}" then Color = "FFA500"

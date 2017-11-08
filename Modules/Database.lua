@@ -8,6 +8,8 @@ function HealingAsssignments.Mainframe:PopulateTankDropdown()
 	local OptionsFrame = 16
 	local LeftsideCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.LeftsideCheckbox:GetChecked()
 	local RightsideCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.RightsideCheckbox:GetChecked()
+	local MeleeCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.MeleeCheckbox:GetChecked()
+	local DispelCheck = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.DispelCheckbox:GetChecked()
 	local CustomCheckbox = HealingAsssignments.Mainframe.Foreground.Profile[1].Template[OptionsFrame].Assigments.Content.CustomCheckbox:GetChecked()
 	
 	local info = {};
@@ -59,6 +61,30 @@ function HealingAsssignments.Mainframe:PopulateTankDropdown()
 		-- create emtpy field to deleting
 		info.text = "Right Side"
 		info.textR = 0; info.textG = 0; info.textB = 1;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalTankDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+	
+	if MeleeCheck == 1 then 
+		-- create emtpy field to deleting
+		info.text = "Melee"
+		info.textR = 0.49; info.textG = 0.51; info.textB = 0.27;
+		info.checked = false
+		info.func = function()
+		UIDropDownMenu_SetSelectedID(GlobalTankDropDownID, this:GetID(), 0);
+			HealingAsssignments:UpdateRaidDataBase()
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+	
+	if DispelCheck == 1 then 
+		-- create emtpy field to deleting
+		info.text = "Dispel"
+		info.textR = 1; info.textG = 1; info.textB = 1;
 		info.checked = false
 		info.func = function()
 		UIDropDownMenu_SetSelectedID(GlobalTankDropDownID, this:GetID(), 0);
@@ -266,7 +292,9 @@ function HealingAsssignments:UpdateRaidDataBase()
 			-- check for additional tanks
 			if TankName == "Left Side" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetTextColor(1,0,0,1) end
 			if TankName == "Right Side" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetTextColor(0,0,1,1) end
-			if foundName == 0 and TankName ~= "Right Side" and TankName ~= "Left Side" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetTextColor(0,1,0,1) end
+			if TankName == "Melee" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetTextColor(0.49,0.51,0.27,1) end
+			if TankName == "Dispel" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetTextColor(1,1,1,1) end
+			if foundName == 0 and TankName ~= "Right Side" and TankName ~= "Left Side" and TankName ~= "Melee" and TankName ~= "Dispel" then getglobal(HealingAsssignments.Mainframe.Foreground.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].Assigments.Content.Frame[i].Tank[i]:GetName().."Text"):SetTextColor(0,1,0,1) end
 			
 			HealerNum = HealingAssignmentsTemplates.Profile[HealingAsssignments.Mainframe.ActiveProfile].Template[activeFrame].TankHealer[i]
 			if HealerNum == nil then HealerNum = 0 end
